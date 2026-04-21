@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff OT Entry</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4CAF50">
+<style>
+body {
+    font-family: Arial;
+    padding: 15px;
+    background: #f4f4f4;
+}
+
+.card {
+    background: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: green;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.staff-item {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+</style>
+
+</head>
+
+<body>
+
+<h3>Overtime Entry</h3>
+
+<div class="card">
+    <label>Select Date</label>
+    <input type="date" id="otdate">
+</div>
+
+<div class="card">
+    <button type="button" onclick="selectAll()">Select All</button>
+    <div id="staffList">Loading...</div>
+</div>
+
+<div class="card">
+    <button onclick="saveOT()">SUBMIT OT</button>
+</div>
+
+<div id="status"></div>
+
+<script>
+
+const URL = "https://qikauwgsqsylseitsoxh.supabase.co/rest/v1/";
+const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFpa2F1d2dzcXN5bHNlaXRzb3hoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3MTc4NjcsImV4cCI6MjA5MDI5Mzg2N30.f4xQpdDIQnfg3ekKnWN6lbvHcnfLVlvmkBCK-8WwDzU";
+
+// ================= LOAD STAFF =================
+async function loadStaff() {
+
+    let res = await fetch(URL + "staffdetails?isactive=eq.1&select=id,name", {
+        headers: {
+            "apikey": KEY,
+            "Authorization": "Bearer " + KEY
+        }
+    });
+
+    let data = await res.json();
+
+    let html = "";
+
+    data.forEach(s => {
+        html += `
+        <div class="staff-item">
+            <input type="checkbox" value="${s.id}">
+            ${s.name}
+        </div>`;
+    });
+
+    document.getElementById("staffList").innerHTML = html;
+}
+
+// ================= SELECT ALL =================
+function selectAll() {
+    document.querySelectorAll("#staffList input").forEach(c => c.checked = true);
+}
+
+// ================= SAVE OT =================
+async function saveOT() {
+
+    let date = document.getElementById("otdate").value;
+
+    if (!date) {
+        alert("Select date");
+        return;
+    }
+
+    let checked = document.querySelectorAll("#staffList input:checked");
+
+    if (checked.length === 0) {
+        alert("Select staff");
+        return;
+    }
+
+    let rows = [];
+
+    checked.forEach(c => {
+        rows.push({
+            staffid: parseInt(c.value),
+            otdate: date,
+            otday: 0.5,
+            status: "DAYENTRY",
+            createdat: new Date().toISOString()
+        });
+    });
+
+    document.getElementById("status").innerText = "Saving...";
+
+    let res = await fetch(URL + "staff_overtime", {
+        method: "POST",
+        headers: {
+            "apikey": KEY,
+            "Authorization": "Bearer " + KEY,
+            "Content-Type": "application/json",
+            "Prefer": "resolution=ignore-duplicates,return=minimal"
+        },
+        body: JSON.stringify(rows)
+    });
+
+    if (!res.ok) {
+        let err = await res.text();
+        alert("Error: " + err);
+        return;
+    }
+
+    document.getElementById("status").innerText = "Saved ✔";
+
+    document.querySelectorAll("#staffList input").forEach(c => c.checked = false);
+    document.getElementById("otdate").value = "";
+}
+// ================= AUTO LOAD =================
+loadStaff();
+
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+</body>
+</html>
