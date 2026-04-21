@@ -39,13 +39,22 @@ input[type="date"] {
     padding: 8px;
     border-bottom: 1px solid #ddd;
 }
+
+.btn-blue {
+    background: #2196F3;
+}
+
+#status {
+    font-weight: bold;
+    margin-top: 10px;
+}
 </style>
 
 </head>
 
 <body>
 
-<h3>Overtime Entry</h3>
+<h3>Friday Overtime Entry</h3>
 
 <div class="card">
     <label>Select Date</label>
@@ -53,7 +62,7 @@ input[type="date"] {
 </div>
 
 <div class="card">
-    <button type="button" onclick="selectAll()">Select All</button>
+   <button type="button" class="btn-blue" onclick="selectAll()">Select All</button>
     <div id="staffList">Loading...</div>
 </div>
 
@@ -122,12 +131,13 @@ async function saveOT() {
             staffid: parseInt(c.value),
             otdate: date,
             otday: 0.5,
-            status: "DAYENTRY",
+            status: "FridayEntry",
             createdat: new Date().toISOString()
         });
     });
 
-    document.getElementById("status").innerText = "Saving...";
+    document.getElementById("status").style.color = "black";
+document.getElementById("status").innerText = "Saving...";
 
     let res = await fetch(URL + "staff_overtime", {
         method: "POST",
@@ -141,15 +151,19 @@ async function saveOT() {
     });
 
     if (!res.ok) {
-        let err = await res.text();
-        alert("Error: " + err);
-        return;
-    }
+    let err = await res.text();
+    let status = document.getElementById("status");
+    status.style.color = "red";
+    status.innerText = "Error: " + err;
+    return;
+}
 
-    document.getElementById("status").innerText = "Saved ✔";
+   let status = document.getElementById("status");
+status.style.color = "green";
+status.innerText = "Saved ✔ Successfully";
 
-    document.querySelectorAll("#staffList input").forEach(c => c.checked = false);
-    document.getElementById("otdate").value = "";
+document.querySelectorAll("#staffList input").forEach(c => c.checked = false);
+document.getElementById("otdate").value = "";
 }
 // ================= AUTO LOAD =================
 loadStaff();
