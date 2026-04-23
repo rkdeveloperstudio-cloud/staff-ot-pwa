@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Staff OT Entry</title>
+
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#4CAF50">
+
 <style>
 body {
     font-family: Arial;
@@ -49,25 +51,27 @@ input[type="date"] {
     margin-top: 10px;
 }
 </style>
-
 </head>
 
 <body>
 
 <h3>Friday Overtime Entry</h3>
 
+<!-- 🌐 LANGUAGE BUTTON -->
+<button onclick="toggleLang()">🌐 Arabic / English</button>
+
 <div class="card">
-    <label>Select Date</label>
+    <label id="lblDate">Select Date</label>
     <input type="date" id="otdate">
 </div>
 
 <div class="card">
-   <button type="button" class="btn-blue" onclick="selectAll()">Select All</button>
+    <button type="button" class="btn-blue" onclick="selectAll()" id="btnSelectAll">Select All</button>
     <div id="staffList">Loading...</div>
 </div>
 
 <div class="card">
-    <button onclick="saveOT()">SUBMIT OT</button>
+    <button onclick="saveOT()" id="btnSubmit">SUBMIT OT</button>
 </div>
 
 <div id="status"></div>
@@ -76,6 +80,11 @@ input[type="date"] {
 
 const URL = "https://qikauwgsqsylseitsoxh.supabase.co/rest/v1/";
 const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFpa2F1d2dzcXN5bHNlaXRzb3hoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3MTc4NjcsImV4cCI6MjA5MDI5Mzg2N30.f4xQpdDIQnfg3ekKnWN6lbvHcnfLVlvmkBCK-8WwDzU";
+
+// 🌐 LANGUAGE STATE
+let isArabic = false;
+let staffData = [];
+let translatedCache = {};
 
 // ================= LOAD STAFF =================
 async function loadStaff() {
@@ -87,19 +96,66 @@ async function loadStaff() {
         }
     });
 
+    staffData = await res.json();
+    renderStaff();
+}
+
+// ================= TRANSLATE =================
+async function translateText(text) {
+
+    if (translatedCache[text]) return translatedCache[text];
+
+    let res = await fetch(
+        "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ar&dt=t&q=" 
+        + encodeURIComponent(text)
+    );
+
     let data = await res.json();
+    let translated = data[0][0][0];
+
+    translatedCache[text] = translated;
+    return translated;
+}
+
+// ================= RENDER STAFF =================
+async function renderStaff() {
 
     let html = "";
 
-    data.forEach(s => {
+    for (let s of staffData) {
+
+        let name = s.name;
+
+        if (isArabic) {
+            name = await translateText(s.name);
+        }
+
         html += `
         <div class="staff-item">
             <input type="checkbox" value="${s.id}">
-            ${s.name}
+            ${name}
         </div>`;
-    });
+    }
 
     document.getElementById("staffList").innerHTML = html;
+}
+
+// ================= LANGUAGE TOGGLE =================
+function toggleLang() {
+
+    isArabic = !isArabic;
+
+    // RTL switch
+    document.body.dir = isArabic ? "rtl" : "ltr";
+
+    // UI text change
+    document.getElementById("lblDate").innerText = isArabic ? "اختر التاريخ" : "Select Date";
+    document.getElementById("btnSelectAll").innerText = isArabic ? "تحديد الكل" : "Select All";
+    document.getElementById("btnSubmit").innerText = isArabic ? "إرسال" : "SUBMIT OT";
+
+    document.getElementById("status").innerText = isArabic ? "جاري التحويل..." : "Switching...";
+
+    renderStaff();
 }
 
 // ================= SELECT ALL =================
@@ -113,14 +169,14 @@ async function saveOT() {
     let date = document.getElementById("otdate").value;
 
     if (!date) {
-        alert("Select date");
+        alert(isArabic ? "اختر التاريخ" : "Select date");
         return;
     }
 
     let checked = document.querySelectorAll("#staffList input:checked");
 
     if (checked.length === 0) {
-        alert("Select staff");
+        alert(isArabic ? "اختر الموظفين" : "Select staff");
         return;
     }
 
@@ -136,8 +192,9 @@ async function saveOT() {
         });
     });
 
-    document.getElementById("status").style.color = "black";
-document.getElementById("status").innerText = "Saving...";
+    let status = document.getElementById("status");
+    status.style.color = "black";
+    status.innerText = isArabic ? "جارٍ الحفظ..." : "Saving...";
 
     let res = await fetch(URL + "staff_overtime", {
         method: "POST",
@@ -151,24 +208,24 @@ document.getElementById("status").innerText = "Saving...";
     });
 
     if (!res.ok) {
-    let err = await res.text();
-    let status = document.getElementById("status");
-    status.style.color = "red";
-    status.innerText = "Error: " + err;
-    return;
+        let err = await res.text();
+        status.style.color = "red";
+        status.innerText = (isArabic ? "خطأ: " : "Error: ") + err;
+        return;
+    }
+
+    status.style.color = "green";
+    status.innerText = isArabic ? "تم الحفظ بنجاح ✔" : "Saved ✔ Successfully";
+
+    document.querySelectorAll("#staffList input").forEach(c => c.checked = false);
+    document.getElementById("otdate").value = "";
 }
 
-   let status = document.getElementById("status");
-status.style.color = "green";
-status.innerText = "Saved ✔ Successfully";
-
-document.querySelectorAll("#staffList input").forEach(c => c.checked = false);
-document.getElementById("otdate").value = "";
-}
 // ================= AUTO LOAD =================
 loadStaff();
 
 </script>
+
 <script>
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js");
