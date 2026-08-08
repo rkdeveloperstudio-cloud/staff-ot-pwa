@@ -6,13 +6,9 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-   content="width=device-width,
-            initial-scale=1,
-            maximum-scale=1,
-            minimum-scale=1,
-            user-scalable=no,
-            viewport-fit=cover">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
 <title>Staff OT Entry</title>
 
@@ -27,6 +23,20 @@
 
 <meta name="apple-mobile-web-app-title"
    content="Staff OT">
+
+<link rel="manifest" href="./manifest.json">
+
+<meta name="theme-color" content="#764ba2">
+
+<link
+    rel="icon"
+    type="image/png"
+    sizes="192x192"
+    href="./icon-192.png">
+
+<link
+    rel="apple-touch-icon"
+    href="./icon-192.png">
 
 <style>
 
@@ -1382,6 +1392,329 @@ input,
 }
 
 </style>
+
+
+
+<style>
+
+/* =========================================================
+   RESPONSIVE / FITTED LAYOUT ONLY
+   Keeps existing design unchanged
+   ========================================================= */
+
+/* Prevent horizontal overflow */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Make all elements calculate width correctly */
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.container,
+.app,
+.main-container {
+    width: 100%;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =========================================================
+   IMAGES / MEDIA
+   ========================================================= */
+
+img,
+video,
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* =========================================================
+   DATE BOX
+   ========================================================= */
+
+.date-box {
+    width: 100%;
+    max-width: 100%;
+}
+
+.date-box input[type="date"] {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   STAFF AREA
+   ========================================================= */
+
+.staff-list {
+    width: 100%;
+    max-width: 100%;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* =========================================================
+   STAFF ITEMS
+   ========================================================= */
+
+.staff-item {
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+}
+
+.staff-name {
+    min-width: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   STAFF TOOLS
+   ========================================================= */
+
+.staff-tools {
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+}
+
+.tools {
+    min-width: 0;
+}
+
+.tool-btn {
+    max-width: 100%;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+.submit-btn {
+    width: 100%;
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        width: 100%;
+        max-width: 100%;
+
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .container,
+    .app,
+    .main-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .section-title-wrap {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .section-title-wrap > div:last-child {
+        min-width: 0;
+    }
+
+    .section-title,
+    .section-caption {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .date-box {
+        width: 100%;
+    }
+
+    .staff-tools {
+        width: 100%;
+    }
+
+    .staff-list {
+        width: 100%;
+        max-width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    body {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .staff-tools {
+        gap: 8px;
+    }
+
+    .tools {
+        max-width: 100%;
+    }
+
+    .tool-btn {
+        min-width: 0;
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLETS
+   ========================================================= */
+
+@media (min-width: 601px) and (max-width: 900px) {
+
+    body {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .container,
+    .app,
+    .main-container {
+        width: 100%;
+        max-width: 680px;
+    }
+
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 901px) {
+
+    .container,
+    .app,
+    .main-container {
+        width: 100%;
+        max-width: 720px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE TOUCH
+   ========================================================= */
+
+button,
+input,
+select,
+textarea {
+    max-width: 100%;
+}
+
+button,
+input[type="checkbox"],
+input[type="date"] {
+    touch-action: manipulation;
+}
+
+
+/* =========================================================
+   PREVENT INPUT ZOOM ON MOBILE
+   ========================================================= */
+
+input,
+select,
+textarea {
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   RTL RESPONSIVE SUPPORT
+   Does not change your existing visual design
+   ========================================================= */
+
+html[dir="rtl"] {
+    direction: rtl;
+}
+
+html[dir="rtl"] body {
+    direction: rtl;
+}
+
+
+/* =========================================================
+   SAFE AREA FOR PWA PHONES
+   ========================================================= */
+
+@supports (padding: env(safe-area-inset-left)) {
+
+    body {
+        padding-left:
+            max(
+                10px,
+                env(safe-area-inset-left)
+            );
+
+        padding-right:
+            max(
+                10px,
+                env(safe-area-inset-right)
+            );
+
+        padding-bottom:
+            max(
+                12px,
+                env(safe-area-inset-bottom)
+            );
+    }
+
+}
+
+</style>
+
+
 
 </head>
 
