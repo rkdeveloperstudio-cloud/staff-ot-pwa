@@ -1,236 +1,2578 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+   content="width=device-width,
+            initial-scale=1,
+            maximum-scale=1,
+            minimum-scale=1,
+            user-scalable=no,
+            viewport-fit=cover">
+
 <title>Staff OT Entry</title>
 
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#4CAF50">
+<meta name="theme-color" content="#061714">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style"
+   content="black-translucent">
+
+<meta name="apple-mobile-web-app-title"
+   content="Staff OT">
 
 <style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+
+    box-sizing: border-box;
+
+    -webkit-tap-highlight-color: transparent;
+
+    -webkit-touch-callout: none;
+
+    user-select: none;
+
+}
+
+html,
 body {
-    font-family: Arial;
-    padding: 15px;
-    background: #f4f4f4;
-}
 
-.card {
-    background: white;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-}
+    margin: 0;
 
-button {
     width: 100%;
-    padding: 12px;
-    background: green;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
+
+    min-height: 100%;
+
+    touch-action: manipulation;
+
+    overscroll-behavior: none;
+
 }
+
+body {
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: #ecfdf5;
+
+    min-height: 100vh;
+
+    padding:
+        max(18px, env(safe-area-inset-top))
+        max(16px, env(safe-area-inset-right))
+        max(22px, env(safe-area-inset-bottom))
+        max(16px, env(safe-area-inset-left));
+
+    overflow-x: hidden;
+
+    background:
+
+        radial-gradient(
+            600px circle at -10% -10%,
+            rgba(16,185,129,.32),
+            transparent 45%
+        ),
+
+        radial-gradient(
+            500px circle at 110% 5%,
+            rgba(6,182,212,.25),
+            transparent 45%
+        ),
+
+        radial-gradient(
+            600px circle at 50% 110%,
+            rgba(20,184,166,.18),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            #03110f 0%,
+            #061714 45%,
+            #071822 100%
+        );
+
+}
+
+
+/* =========================================================
+   BACKGROUND BLOBS
+========================================================= */
+
+.bg-orb {
+
+    position: fixed;
+
+    border-radius: 50%;
+
+    filter: blur(75px);
+
+    pointer-events: none;
+
+    z-index: -1;
+
+}
+
+.orb-one {
+
+    width: 190px;
+    height: 190px;
+
+    top: 15%;
+
+    left: -90px;
+
+    background: #10b981;
+
+    opacity: .12;
+
+}
+
+.orb-two {
+
+    width: 220px;
+    height: 220px;
+
+    right: -100px;
+
+    bottom: 15%;
+
+    background: #06b6d4;
+
+    opacity: .11;
+
+}
+
+
+/* =========================================================
+   APP CONTAINER
+========================================================= */
+
+.app {
+
+    width: 100%;
+
+    max-width: 620px;
+
+    margin: 0 auto;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    position: relative;
+
+    text-align: center;
+
+    padding: 8px 0 20px;
+
+}
+
+
+.logo {
+
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 25px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #10b981,
+            #059669 45%,
+            #06b6d4
+        );
+
+    box-shadow:
+
+        0 18px 40px
+        rgba(16,185,129,.25),
+
+        0 4px 12px
+        rgba(0,0,0,.25),
+
+        inset 0 1px 2px
+        rgba(255,255,255,.40);
+
+    position: relative;
+
+}
+
+
+.logo::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 2px;
+
+    border-radius: 23px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+}
+
+
+.logo-icon {
+
+    font-size: 34px;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 28px;
+
+    line-height: 1.15;
+
+    font-weight: 850;
+
+    letter-spacing: -.8px;
+
+}
+
+
+.header-subtitle {
+
+    margin-top: 7px;
+
+    font-size: 13px;
+
+    color:
+        rgba(236,253,245,.52);
+
+}
+
+
+/* =========================================================
+   TOP STATUS
+========================================================= */
+
+.live-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 13px;
+
+    padding:
+        7px 12px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(16,185,129,.08);
+
+    border:
+        1px solid
+        rgba(52,211,153,.14);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #a7f3d0;
+
+}
+
+
+.live-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #34d399;
+
+    box-shadow:
+        0 0 10px
+        rgba(52,211,153,.9);
+
+}
+
+
+/* =========================================================
+   GLASS PANEL
+========================================================= */
+
+.glass {
+
+    border:
+        1px solid
+        rgba(255,255,255,.095);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.095),
+            rgba(255,255,255,.035)
+        );
+
+    backdrop-filter:
+        blur(25px);
+
+    -webkit-backdrop-filter:
+        blur(25px);
+
+    box-shadow:
+
+        0 20px 55px
+        rgba(0,0,0,.24),
+
+        inset 0 1px 0
+        rgba(255,255,255,.08);
+
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+.language-btn {
+
+    width: 100%;
+
+    height: 53px;
+
+    margin-bottom: 14px;
+
+    border-radius: 17px;
+
+    border:
+        1px solid
+        rgba(52,211,153,.16);
+
+    color: #d1fae5;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(16,185,129,.13),
+            rgba(6,182,212,.08)
+        );
+
+    font-size: 14px;
+
+    font-weight: 750;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.05);
+
+    touch-action: manipulation;
+
+}
+
+
+.language-btn:active {
+
+    transform: scale(.975);
+
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section {
+
+    padding: 18px;
+
+    margin-bottom: 14px;
+
+    border-radius: 23px;
+
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+
+}
+
+
+.section-title-wrap {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+}
+
+
+.section-icon {
+
+    width: 39px;
+    height: 39px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(16,185,129,.19),
+            rgba(6,182,212,.10)
+        );
+
+    border:
+        1px solid
+        rgba(110,231,183,.10);
+
+    font-size: 18px;
+
+}
+
+
+.section-title {
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+}
+
+
+.section-caption {
+
+    margin-top: 2px;
+
+    font-size: 11px;
+
+    color:
+        rgba(236,253,245,.43);
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.date-label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .2px;
+
+    color:
+        rgba(236,253,245,.55);
+
+}
+
+
+.date-box {
+
+    position: relative;
+
+}
+
+
+.date-symbol {
+
+    position: absolute;
+
+    left: 15px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    font-size: 18px;
+
+    pointer-events: none;
+
+    z-index: 2;
+
+}
+
 
 input[type="date"] {
+
     width: 100%;
-    padding: 10px;
+
+    height: 56px;
+
+    padding:
+        0 15px 0 48px;
+
+    border-radius: 16px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    outline: none;
+
+    background:
+        rgba(0,0,0,.19);
+
+    color: #ecfdf5;
+
+    color-scheme: dark;
+
     font-size: 16px;
+
+    font-weight: 600;
+
 }
+
+
+input[type="date"]:focus {
+
+    border-color:
+        rgba(52,211,153,.55);
+
+    box-shadow:
+
+        0 0 0 3px
+        rgba(16,185,129,.09),
+
+        0 8px 25px
+        rgba(0,0,0,.12);
+
+}
+
+
+/* =========================================================
+   STAFF HEADER
+========================================================= */
+
+.staff-tools {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 13px;
+
+}
+
+
+.counter {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 12px;
+
+    color:
+        rgba(236,253,245,.48);
+
+}
+
+
+.counter-number {
+
+    min-width: 27px;
+    height: 27px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+        rgba(16,185,129,.13);
+
+    border:
+        1px solid
+        rgba(52,211,153,.14);
+
+    color: #6ee7b7;
+
+    font-size: 12px;
+
+    font-weight: 850;
+
+}
+
+
+.tools {
+
+    display: flex;
+
+    gap: 7px;
+
+}
+
+
+.tool-btn {
+
+    min-width: 76px;
+
+    height: 36px;
+
+    padding:
+        0 11px;
+
+    border-radius: 11px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    background:
+        rgba(255,255,255,.055);
+
+    color:
+        rgba(236,253,245,.82);
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    touch-action: manipulation;
+
+}
+
+
+.tool-btn:active {
+
+    transform: scale(.94);
+
+}
+
+
+/* =========================================================
+   STAFF LIST
+========================================================= */
+
+.staff-list {
+
+    max-height: 430px;
+
+    overflow-y: auto;
+
+    padding-right: 2px;
+
+    overscroll-behavior: contain;
+
+}
+
+
+.staff-list::-webkit-scrollbar {
+
+    width: 4px;
+
+}
+
+
+.staff-list::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(52,211,153,.24);
+
+    border-radius: 10px;
+
+}
+
+
+/* =========================================================
+   STAFF ITEM
+========================================================= */
 
 .staff-item {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 61px;
+
+    padding:
+        8px 11px;
+
+    margin-bottom: 7px;
+
+    border-radius: 16px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.055);
+
+    background:
+        rgba(255,255,255,.035);
+
+    overflow: hidden;
+
+    transition:
+        transform .15s ease,
+        border-color .15s ease,
+        background .15s ease,
+        box-shadow .15s ease;
+
+    touch-action: manipulation;
+
 }
 
-.btn-blue {
-    background: #2196F3;
+
+.staff-item::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 3px;
+
+    background:
+        transparent;
+
+    transition:
+        background .15s ease;
+
 }
 
-#status {
-    font-weight: bold;
-    margin-top: 10px;
+
+.staff-item.selected {
+
+    border-color:
+        rgba(52,211,153,.26);
+
+    background:
+
+        linear-gradient(
+            100deg,
+            rgba(16,185,129,.14),
+            rgba(6,182,212,.055)
+        );
+
+    box-shadow:
+
+        0 7px 20px
+        rgba(16,185,129,.07);
+
 }
+
+
+.staff-item.selected::before {
+
+    background:
+        linear-gradient(
+            #34d399,
+            #06b6d4
+        );
+
+}
+
+
+.staff-item:active {
+
+    transform:
+        scale(.985);
+
+}
+
+
+/* =========================================================
+   STAFF AVATAR
+========================================================= */
+
+.staff-avatar {
+
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    color: #a7f3d0;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(16,185,129,.16),
+            rgba(6,182,212,.10)
+        );
+
+    border:
+        1px solid
+        rgba(52,211,153,.12);
+
+    font-size: 13px;
+
+    font-weight: 850;
+
+}
+
+
+.staff-item.selected
+.staff-avatar {
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #059669,
+            #06b6d4
+        );
+
+    border-color:
+        transparent;
+
+    box-shadow:
+        0 5px 15px
+        rgba(16,185,129,.18);
+
+}
+
+
+.staff-name {
+
+    flex: 1;
+
+    min-width: 0;
+
+    font-size: 14px;
+
+    font-weight: 650;
+
+    color:
+        rgba(240,253,244,.91);
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+.staff-id {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 9px;
+
+    color:
+        rgba(236,253,245,.30);
+
+}
+
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.staff-checkbox {
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    width: 23px;
+    height: 23px;
+
+    min-width: 23px;
+
+    margin: 0;
+
+    border-radius: 8px;
+
+    border:
+        2px solid
+        rgba(255,255,255,.19);
+
+    background:
+        rgba(0,0,0,.17);
+
+    position: relative;
+
+}
+
+
+.staff-checkbox:checked {
+
+    border-color:
+        #34d399;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #10b981,
+            #06b6d4
+        );
+
+    box-shadow:
+        0 4px 13px
+        rgba(16,185,129,.24);
+
+}
+
+
+.staff-checkbox:checked::after {
+
+    content: "✓";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-53%);
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading {
+
+    padding: 35px 10px;
+
+    text-align: center;
+
+    color:
+        rgba(236,253,245,.45);
+
+    font-size: 12px;
+
+}
+
+
+.spinner {
+
+    width: 32px;
+    height: 32px;
+
+    margin:
+        0 auto 12px;
+
+    border-radius: 50%;
+
+    border:
+        3px solid
+        rgba(255,255,255,.08);
+
+    border-top-color:
+        #34d399;
+
+    border-right-color:
+        #06b6d4;
+
+    animation:
+        spin .75s linear infinite;
+
+}
+
+
+@keyframes spin {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   SUBMIT PANEL
+========================================================= */
+
+.submit-panel {
+
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    border-radius: 22px;
+
+}
+
+
+.submit-btn {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 61px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            120deg,
+            #047857,
+            #059669 35%,
+            #10b981 65%,
+            #06b6d4
+        );
+
+    box-shadow:
+
+        0 15px 35px
+        rgba(16,185,129,.22),
+
+        inset 0 1px 1px
+        rgba(255,255,255,.28);
+
+    font-size: 16px;
+
+    font-weight: 850;
+
+    letter-spacing: .3px;
+
+    touch-action: manipulation;
+
+}
+
+
+.submit-btn::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -100%;
+
+    width: 60%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.16),
+            transparent
+        );
+
+    transform:
+        skewX(-20deg);
+
+    animation:
+        shine 4s infinite;
+
+}
+
+
+@keyframes shine {
+
+    0%,
+    55% {
+
+        left: -100%;
+
+    }
+
+    70% {
+
+        left: 130%;
+
+    }
+
+    100% {
+
+        left: 130%;
+
+    }
+
+}
+
+
+.submit-btn:active {
+
+    transform:
+        scale(.975);
+
+}
+
+
+.submit-btn:disabled {
+
+    opacity: .55;
+
+    animation: none;
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+
+    min-height: 22px;
+
+    margin-top: 11px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    font-weight: 750;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    padding: 4px 0 5px;
+
+    text-align: center;
+
+    font-size: 9px;
+
+    color:
+        rgba(236,253,245,.24);
+
+}
+
+
+/* =========================================================
+   RTL
+========================================================= */
+
+body[dir="rtl"] {
+
+    font-family:
+        Arial,
+        "Segoe UI",
+        sans-serif;
+
+}
+
+
+body[dir="rtl"]
+.date-symbol {
+
+    left: auto;
+
+    right: 15px;
+
+}
+
+
+body[dir="rtl"]
+input[type="date"] {
+
+    padding-left: 15px;
+
+    padding-right: 48px;
+
+}
+
+
+body[dir="rtl"]
+.staff-item::before {
+
+    left: auto;
+
+    right: 0;
+
+}
+
+
+body[dir="rtl"]
+.staff-list {
+
+    padding-right: 0;
+
+    padding-left: 2px;
+
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 700px) {
+
+    body {
+
+        padding-top: 35px;
+
+    }
+
+    .header h1 {
+
+        font-size: 30px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .header h1 {
+
+        font-size: 25px;
+
+    }
+
+    .logo {
+
+        width: 70px;
+        height: 70px;
+
+    }
+
+    .section {
+
+        padding: 15px;
+
+    }
+
+    .tool-btn {
+
+        min-width: 68px;
+
+        padding:
+            0 8px;
+
+    }
+
+}
+
+
+/* =========================================================
+   NO ZOOM
+========================================================= */
+
+button,
+input,
+.staff-item {
+
+    touch-action: manipulation;
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<h3>Friday Overtime Entry</h3>
+<div class="bg-orb orb-one"></div>
 
-<!-- 🌐 LANGUAGE BUTTON -->
-<button onclick="toggleLang()">🌐 Arabic / English</button>
+<div class="bg-orb orb-two"></div>
 
-<div class="card">
-    <label id="lblDate">Select Date</label>
-    <input type="date" id="otdate">
+<div class="app">
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <span class="logo-icon">
+            ⏱️
+        </span>
+
+    </div>
+
+
+    <h1 id="pageTitle">
+        Friday Overtime
+    </h1>
+
+
+    <div
+        class="header-subtitle"
+        id="pageSubtitle">
+
+        Staff overtime entry
+
+    </div>
+
+
+    <div class="live-status">
+
+        <span class="live-dot"></span>
+
+        <span id="liveText">
+            OT ENTRY ACTIVE
+        </span>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     LANGUAGE
+====================================================== -->
+
+<button
+    class="language-btn"
+    id="langButton"
+    onclick="toggleLang()">
+
+    🌐 Arabic / English
+
+</button>
+
+
+<!-- =====================================================
+     DATE
+====================================================== -->
+
+<section class="glass section">
+
+    <div class="section-header">
+
+        <div class="section-title-wrap">
+
+            <div class="section-icon">
+                📅
+            </div>
+
+            <div>
+
+                <div
+                    class="section-title"
+                    id="dateTitle">
+
+                    Overtime Date
+
+                </div>
+
+                <div
+                    class="section-caption"
+                    id="dateCaption">
+
+                    Select the Friday date
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <label
+        class="date-label"
+        id="lblDate">
+
+        SELECT DATE
+
+    </label>
+
+
+    <div class="date-box">
+
+        <span class="date-symbol">
+            📅
+        </span>
+
+        <input
+            type="date"
+            id="otdate">
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STAFF
+====================================================== -->
+
+<section class="glass section">
+
+    <div class="section-header">
+
+        <div class="section-title-wrap">
+
+            <div class="section-icon">
+                👥
+            </div>
+
+            <div>
+
+                <div
+                    class="section-title"
+                    id="staffTitle">
+
+                    Select Staff
+
+                </div>
+
+                <div
+                    class="section-caption"
+                    id="staffCaption">
+
+                    Choose employees for overtime
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="staff-tools">
+
+        <div class="counter">
+
+            <span id="selectedText">
+                Selected
+            </span>
+
+            <span
+                class="counter-number"
+                id="selectedCount">
+
+                0
+
+            </span>
+
+        </div>
+
+
+        <div class="tools">
+
+            <button
+                class="tool-btn"
+                id="btnSelectAll"
+                onclick="selectAll()">
+
+                ✓ Select All
+
+            </button>
+
+
+            <button
+                class="tool-btn"
+                id="btnClearAll"
+                onclick="clearAll()">
+
+                Clear
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="staff-list"
+        id="staffList">
+
+        <div class="loading">
+
+            <div class="spinner"></div>
+
+            Loading staff...
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SUBMIT
+====================================================== -->
+
+<section class="glass submit-panel">
+
+    <button
+        class="submit-btn"
+        id="btnSubmit"
+        onclick="saveOT()">
+
+        <span id="submitText">
+            SUBMIT OVERTIME
+        </span>
+
+    </button>
+
+
+    <div
+        class="status"
+        id="status">
+    </div>
+
+</section>
+
+
+<div class="footer">
+
+    Staff OT Management
+
 </div>
 
-<div class="card">
-    <button type="button" class="btn-blue" onclick="selectAll()" id="btnSelectAll">Select All</button>
-    <div id="staffList">Loading...</div>
-</div>
 
-<div class="card">
-    <button onclick="saveOT()" id="btnSubmit">SUBMIT OT</button>
 </div>
-
-<div id="status"></div>
 
 <script>
 
-const URL = "https://qikauwgsqsylseitsoxh.supabase.co/rest/v1/";
-const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFpa2F1d2dzcXN5bHNlaXRzb3hoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3MTc4NjcsImV4cCI6MjA5MDI5Mzg2N30.f4xQpdDIQnfg3ekKnWN6lbvHcnfLVlvmkBCK-8WwDzU";
 
-// 🌐 LANGUAGE STATE
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const URL =
+    "https://qikauwgsqsylseitsoxh.supabase.co/rest/v1/";
+
+const KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFpa2F1d2dzcXN5bHNlaXRzb3hoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3MTc4NjcsImV4cCI6MjA5MDI5Mzg2N30.f4xQpdDIQnfg3ekKnWN6lbvHcnfLVlvmkBCK-8WwDzU";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
 let isArabic = false;
+
 let staffData = [];
+
 let translatedCache = {};
 
-// ================= LOAD STAFF =================
+
+/* =========================================================
+   LOAD STAFF
+========================================================= */
+
 async function loadStaff() {
 
-    let res = await fetch(URL + "staffdetails?isactive=eq.1&select=id,name", {
-        headers: {
-            "apikey": KEY,
-            "Authorization": "Bearer " + KEY
-        }
-    });
+    try {
 
-    staffData = await res.json();
-    renderStaff();
+        const res = await fetch(
+
+            URL +
+            "staffdetails?isactive=eq.1&select=id,name",
+
+            {
+
+                headers: {
+
+                    "apikey": KEY,
+
+                    "Authorization":
+                        "Bearer " + KEY
+
+                }
+
+            }
+
+        );
+
+
+        if (!res.ok) {
+
+            throw new Error(
+                "Unable to load staff"
+            );
+
+        }
+
+
+        staffData =
+            await res.json();
+
+
+        renderStaff();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        document.getElementById(
+            "staffList"
+        ).innerHTML = `
+
+            <div class="loading">
+
+                ❌<br><br>
+
+                Unable to load staff
+
+            </div>
+
+        `;
+
+    }
+
 }
 
-// ================= TRANSLATE =================
+
+/* =========================================================
+   TRANSLATION
+========================================================= */
+
 async function translateText(text) {
 
-    if (translatedCache[text]) return translatedCache[text];
+    if (translatedCache[text]) {
 
-    let res = await fetch(
-        "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ar&dt=t&q=" 
-        + encodeURIComponent(text)
-    );
+        return translatedCache[text];
 
-    let data = await res.json();
-    let translated = data[0][0][0];
+    }
 
-    translatedCache[text] = translated;
-    return translated;
+
+    try {
+
+        const res = await fetch(
+
+            "https://translate.googleapis.com/translate_a/single" +
+            "?client=gtx" +
+            "&sl=en" +
+            "&tl=ar" +
+            "&dt=t" +
+            "&q=" +
+            encodeURIComponent(text)
+
+        );
+
+
+        const data =
+            await res.json();
+
+
+        const translated =
+            data[0][0][0];
+
+
+        translatedCache[text] =
+            translated;
+
+
+        return translated;
+
+    }
+
+    catch {
+
+        return text;
+
+    }
+
 }
 
-// ================= RENDER STAFF =================
+
+/* =========================================================
+   INITIALS
+========================================================= */
+
+function getInitials(name) {
+
+    if (!name) {
+
+        return "?";
+
+    }
+
+
+    const words =
+        name.trim().split(/\s+/);
+
+
+    if (words.length === 1) {
+
+        return words[0]
+            .substring(0, 2)
+            .toUpperCase();
+
+    }
+
+
+    return (
+        words[0][0] +
+        words[words.length - 1][0]
+    ).toUpperCase();
+
+}
+
+
+/* =========================================================
+   RENDER STAFF
+========================================================= */
+
 async function renderStaff() {
+
+    const list =
+        document.getElementById(
+            "staffList"
+        );
+
+
+    list.innerHTML = `
+
+        <div class="loading">
+
+            <div class="spinner"></div>
+
+            ${
+                isArabic
+                ? "جاري تحميل الموظفين..."
+                : "Loading staff..."
+            }
+
+        </div>
+
+    `;
+
 
     let html = "";
 
-    for (let s of staffData) {
 
-        let name = s.name;
+    for (const s of staffData) {
+
+        let name =
+            s.name;
+
 
         if (isArabic) {
-            name = await translateText(s.name);
+
+            name =
+                await translateText(
+                    s.name
+                );
+
         }
 
+
         html += `
-        <div class="staff-item">
-            <input type="checkbox" value="${s.id}">
-            ${name}
-        </div>`;
+
+            <div
+                class="staff-item"
+                onclick="toggleStaff(this)">
+
+
+                <div class="staff-avatar">
+
+                    ${getInitials(s.name)}
+
+                </div>
+
+
+                <div class="staff-name">
+
+                    ${name}
+
+                    <span class="staff-id">
+
+                        ID: ${s.id}
+
+                    </span>
+
+                </div>
+
+
+                <input
+                    class="staff-checkbox"
+                    type="checkbox"
+                    value="${s.id}"
+                    onclick="event.stopPropagation(); updateSelection()">
+
+            </div>
+
+        `;
+
     }
 
-    document.getElementById("staffList").innerHTML = html;
+
+    if (!html) {
+
+        html = `
+
+            <div class="loading">
+
+                ${
+                    isArabic
+                    ? "لا يوجد موظفون"
+                    : "No staff found"
+                }
+
+            </div>
+
+        `;
+
+    }
+
+
+    list.innerHTML =
+        html;
+
+
+    updateSelection();
+
 }
 
-// ================= LANGUAGE TOGGLE =================
-function toggleLang() {
 
-    isArabic = !isArabic;
+/* =========================================================
+   TOGGLE STAFF
+========================================================= */
 
-    // RTL switch
-    document.body.dir = isArabic ? "rtl" : "ltr";
+function toggleStaff(item) {
 
-    // UI text change
-    document.getElementById("lblDate").innerText = isArabic ? "اختر التاريخ" : "Select Date";
-    document.getElementById("btnSelectAll").innerText = isArabic ? "تحديد الكل" : "Select All";
-    document.getElementById("btnSubmit").innerText = isArabic ? "إرسال" : "SUBMIT OT";
+    const checkbox =
+        item.querySelector(
+            ".staff-checkbox"
+        );
 
-    document.getElementById("status").innerText = isArabic ? "جاري التحويل..." : "Switching...";
 
-    renderStaff();
+    checkbox.checked =
+        !checkbox.checked;
+
+
+    updateSelection();
+
 }
 
-// ================= SELECT ALL =================
+
+/* =========================================================
+   UPDATE SELECTION
+========================================================= */
+
+function updateSelection() {
+
+    const checkboxes =
+        document.querySelectorAll(
+            ".staff-checkbox"
+        );
+
+
+    let count = 0;
+
+
+    checkboxes.forEach(
+        checkbox => {
+
+            const item =
+                checkbox.closest(
+                    ".staff-item"
+                );
+
+
+            if (checkbox.checked) {
+
+                count++;
+
+                item.classList.add(
+                    "selected"
+                );
+
+            }
+            else {
+
+                item.classList.remove(
+                    "selected"
+                );
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "selectedCount"
+    ).innerText =
+        count;
+
+}
+
+
+/* =========================================================
+   SELECT ALL
+========================================================= */
+
 function selectAll() {
-    document.querySelectorAll("#staffList input").forEach(c => c.checked = true);
+
+    document
+        .querySelectorAll(
+            ".staff-checkbox"
+        )
+        .forEach(
+            checkbox => {
+
+                checkbox.checked =
+                    true;
+
+            }
+        );
+
+
+    updateSelection();
+
 }
 
-// ================= SAVE OT =================
+
+/* =========================================================
+   CLEAR ALL
+========================================================= */
+
+function clearAll() {
+
+    document
+        .querySelectorAll(
+            ".staff-checkbox"
+        )
+        .forEach(
+            checkbox => {
+
+                checkbox.checked =
+                    false;
+
+            }
+        );
+
+
+    updateSelection();
+
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+async function toggleLang() {
+
+    isArabic =
+        !isArabic;
+
+
+    document.body.dir =
+        isArabic
+        ? "rtl"
+        : "ltr";
+
+
+    document.documentElement.lang =
+        isArabic
+        ? "ar"
+        : "en";
+
+
+    document.getElementById(
+        "pageTitle"
+    ).innerText =
+
+        isArabic
+        ? "العمل الإضافي يوم الجمعة"
+        : "Friday Overtime";
+
+
+    document.getElementById(
+        "pageSubtitle"
+    ).innerText =
+
+        isArabic
+        ? "إدخال العمل الإضافي للموظفين"
+        : "Staff overtime entry";
+
+
+    document.getElementById(
+        "liveText"
+    ).innerText =
+
+        isArabic
+        ? "إدخال العمل الإضافي نشط"
+        : "OT ENTRY ACTIVE";
+
+
+    document.getElementById(
+        "dateTitle"
+    ).innerText =
+
+        isArabic
+        ? "تاريخ العمل الإضافي"
+        : "Overtime Date";
+
+
+    document.getElementById(
+        "dateCaption"
+    ).innerText =
+
+        isArabic
+        ? "اختر تاريخ يوم الجمعة"
+        : "Select the Friday date";
+
+
+    document.getElementById(
+        "lblDate"
+    ).innerText =
+
+        isArabic
+        ? "اختر التاريخ"
+        : "SELECT DATE";
+
+
+    document.getElementById(
+        "staffTitle"
+    ).innerText =
+
+        isArabic
+        ? "اختيار الموظفين"
+        : "Select Staff";
+
+
+    document.getElementById(
+        "staffCaption"
+    ).innerText =
+
+        isArabic
+        ? "اختر الموظفين للعمل الإضافي"
+        : "Choose employees for overtime";
+
+
+    document.getElementById(
+        "selectedText"
+    ).innerText =
+
+        isArabic
+        ? "المحدد"
+        : "Selected";
+
+
+    document.getElementById(
+        "btnSelectAll"
+    ).innerText =
+
+        isArabic
+        ? "✓ تحديد الكل"
+        : "✓ Select All";
+
+
+    document.getElementById(
+        "btnClearAll"
+    ).innerText =
+
+        isArabic
+        ? "مسح"
+        : "Clear";
+
+
+    document.getElementById(
+        "submitText"
+    ).innerText =
+
+        isArabic
+        ? "إرسال العمل الإضافي"
+        : "SUBMIT OVERTIME";
+
+
+    document.getElementById(
+        "langButton"
+    ).innerText =
+
+        isArabic
+        ? "🌐 English / العربية"
+        : "🌐 Arabic / English";
+
+
+    await renderStaff();
+
+}
+
+
+/* =========================================================
+   SAVE OT
+========================================================= */
+
 async function saveOT() {
 
-    let date = document.getElementById("otdate").value;
+    const date =
+        document.getElementById(
+            "otdate"
+        ).value;
+
 
     if (!date) {
-        alert(isArabic ? "اختر التاريخ" : "Select date");
+
+        alert(
+
+            isArabic
+            ? "اختر التاريخ"
+            : "Select date"
+
+        );
+
         return;
+
     }
 
-    let checked = document.querySelectorAll("#staffList input:checked");
+
+    const checked =
+        document.querySelectorAll(
+            ".staff-checkbox:checked"
+        );
+
 
     if (checked.length === 0) {
-        alert(isArabic ? "اختر الموظفين" : "Select staff");
+
+        alert(
+
+            isArabic
+            ? "اختر الموظفين"
+            : "Select staff"
+
+        );
+
         return;
+
     }
 
-    let rows = [];
 
-    checked.forEach(c => {
-        rows.push({
-            staffid: parseInt(c.value),
-            otdate: date,
-            otday: 0.5,
-            status: "FridayEntry",
-            createdat: new Date().toISOString()
-        });
-    });
+    const rows = [];
 
-    let status = document.getElementById("status");
-    status.style.color = "black";
-    status.innerText = isArabic ? "جارٍ الحفظ..." : "Saving...";
 
-    let res = await fetch(URL + "staff_overtime", {
-        method: "POST",
-        headers: {
-            "apikey": KEY,
-            "Authorization": "Bearer " + KEY,
-            "Content-Type": "application/json",
-            "Prefer": "resolution=ignore-duplicates,return=minimal"
-        },
-        body: JSON.stringify(rows)
-    });
+    checked.forEach(
+        checkbox => {
 
-    if (!res.ok) {
-        let err = await res.text();
-        status.style.color = "red";
-        status.innerText = (isArabic ? "خطأ: " : "Error: ") + err;
-        return;
+            rows.push({
+
+                staffid:
+                    parseInt(
+                        checkbox.value
+                    ),
+
+                otdate:
+                    date,
+
+                otday:
+                    0.5,
+
+                status:
+                    "FridayEntry",
+
+                createdat:
+                    new Date()
+                        .toISOString()
+
+            });
+
+        }
+    );
+
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    const button =
+        document.getElementById(
+            "btnSubmit"
+        );
+
+
+    button.disabled =
+        true;
+
+
+    document.getElementById(
+        "submitText"
+    ).innerText =
+
+        isArabic
+        ? "جاري الحفظ..."
+        : "SAVING...";
+
+
+    status.style.color =
+        "#ffffff";
+
+
+    status.innerText =
+
+        isArabic
+        ? "جارٍ حفظ بيانات العمل الإضافي..."
+        : "Saving overtime records...";
+
+
+    try {
+
+        const res =
+            await fetch(
+
+                URL +
+                "staff_overtime",
+
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "apikey": KEY,
+
+                        "Authorization":
+                            "Bearer " + KEY,
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Prefer":
+                            "resolution=ignore-duplicates,return=minimal"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            rows
+                        )
+
+                }
+
+            );
+
+
+        if (!res.ok) {
+
+            const err =
+                await res.text();
+
+            throw new Error(err);
+
+        }
+
+
+        status.style.color =
+            "#34d399";
+
+
+        status.innerText =
+
+            isArabic
+            ? `تم حفظ ${rows.length} موظف بنجاح ✔`
+            : `${rows.length} staff saved successfully ✔`;
+
+
+        clearAll();
+
+
+        document.getElementById(
+            "otdate"
+        ).value = "";
+
+
     }
 
-    status.style.color = "green";
-    status.innerText = isArabic ? "تم الحفظ بنجاح ✔" : "Saved ✔ Successfully";
+    catch (error) {
 
-    document.querySelectorAll("#staffList input").forEach(c => c.checked = false);
-    document.getElementById("otdate").value = "";
+        console.error(error);
+
+
+        status.style.color =
+            "#fb7185";
+
+
+        status.innerText =
+
+            (
+                isArabic
+                ? "خطأ: "
+                : "Error: "
+            )
+            +
+            error.message;
+
+    }
+
+
+    finally {
+
+        button.disabled =
+            false;
+
+
+        document.getElementById(
+            "submitText"
+        ).innerText =
+
+            isArabic
+            ? "إرسال العمل الإضافي"
+            : "SUBMIT OVERTIME";
+
+    }
+
 }
 
-// ================= AUTO LOAD =================
+
+/* =========================================================
+   PREVENT PINCH ZOOM
+========================================================= */
+
+document.addEventListener(
+
+    "touchstart",
+
+    function(event) {
+
+        if (
+            event.touches.length > 1
+        ) {
+
+            event.preventDefault();
+
+        }
+
+    },
+
+    {
+        passive: false
+    }
+
+);
+
+
+/* =========================================================
+   PREVENT DOUBLE TAP ZOOM
+========================================================= */
+
+let lastTouchEnd = 0;
+
+
+document.addEventListener(
+
+    "touchend",
+
+    function(event) {
+
+        const now =
+            Date.now();
+
+
+        if (
+            now - lastTouchEnd < 300
+        ) {
+
+            event.preventDefault();
+
+        }
+
+
+        lastTouchEnd =
+            now;
+
+    },
+
+    {
+        passive: false
+    }
+
+);
+
+
+/* =========================================================
+   PREVENT CTRL + WHEEL ZOOM
+========================================================= */
+
+document.addEventListener(
+
+    "wheel",
+
+    function(event) {
+
+        if (event.ctrlKey) {
+
+            event.preventDefault();
+
+        }
+
+    },
+
+    {
+        passive: false
+    }
+
+);
+
+
+/* =========================================================
+   PREVENT KEYBOARD ZOOM
+========================================================= */
+
+document.addEventListener(
+
+    "keydown",
+
+    function(event) {
+
+        if (
+
+            (event.ctrlKey ||
+             event.metaKey)
+
+            &&
+
+            (
+                event.key === "+" ||
+                event.key === "-" ||
+                event.key === "=" ||
+                event.key === "0"
+            )
+
+        ) {
+
+            event.preventDefault();
+
+        }
+
+    }
+
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
 loadStaff();
 
 </script>
 
-<script>
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js");
-}
-</script>
-
 </body>
+
 </html>
