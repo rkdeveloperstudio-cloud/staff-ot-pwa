@@ -58,18 +58,12 @@
 
 html,
 body {
-
     margin: 0;
-
     width: 100%;
-
     min-height: 100%;
-
-    touch-action: manipulation;
-
-    overscroll-behavior: none;
-
+    overflow-x: hidden;
 }
+
 
 body {
 
@@ -736,17 +730,10 @@ input[type="date"]:focus {
 ========================================================= */
 
 .staff-list {
-
-    max-height: 430px;
-
-    overflow-y: auto;
-
+    width: 100%;
+    overflow: visible;
     padding-right: 2px;
-
-    overscroll-behavior: contain;
-
 }
-
 
 .staff-list::-webkit-scrollbar {
 
@@ -2773,69 +2760,7 @@ async function saveOT() {
 }
 
 
-/* =========================================================
-   PREVENT PINCH ZOOM
-========================================================= */
 
-document.addEventListener(
-
-    "touchstart",
-
-    function(event) {
-
-        if (
-            event.touches.length > 1
-        ) {
-
-            event.preventDefault();
-
-        }
-
-    },
-
-    {
-        passive: false
-    }
-
-);
-
-
-/* =========================================================
-   PREVENT DOUBLE TAP ZOOM
-========================================================= */
-
-let lastTouchEnd = 0;
-
-
-document.addEventListener(
-
-    "touchend",
-
-    function(event) {
-
-        const now =
-            Date.now();
-
-
-        if (
-            now - lastTouchEnd < 300
-        ) {
-
-            event.preventDefault();
-
-        }
-
-
-        lastTouchEnd =
-            now;
-
-    },
-
-    {
-        passive: false
-    }
-
-);
 
 
 /* =========================================================
