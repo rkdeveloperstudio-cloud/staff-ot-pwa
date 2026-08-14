@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -8,7 +7,7 @@
 
 <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>Staff OT Entry</title>
 
@@ -16,17 +15,21 @@
 
 <meta name="mobile-web-app-capable" content="yes">
 
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta
+    name="apple-mobile-web-app-capable"
+    content="yes">
 
-<meta name="apple-mobile-web-app-status-bar-style"
-   content="black-translucent">
+<meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent">
 
-<meta name="apple-mobile-web-app-title"
-   content="Staff OT">
+<meta
+    name="apple-mobile-web-app-title"
+    content="Staff OT">
 
-<link rel="manifest" href="./manifest.json">
-
-<meta name="theme-color" content="#764ba2">
+<link
+    rel="manifest"
+    href="./manifest.json">
 
 <link
     rel="icon"
@@ -38,6 +41,7 @@
     rel="apple-touch-icon"
     href="./icon-192.png">
 
+
 <style>
 
 /* =========================================================
@@ -45,27 +49,37 @@
 ========================================================= */
 
 * {
-
     box-sizing: border-box;
 
     -webkit-tap-highlight-color: transparent;
-
     -webkit-touch-callout: none;
 
-    user-select: none;
-
+    /* Keep the page selectable where appropriate */
 }
 
-html,
-body {
-    margin: 0;
+html {
     width: 100%;
     min-height: 100%;
+
+    margin: 0;
+    padding: 0;
+
     overflow-x: hidden;
+    overflow-y: auto;
+
+    background: #03110f;
 }
 
-
 body {
+
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    margin: 0;
+
+    overflow-x: hidden;
+    overflow-y: auto;
 
     font-family:
         Inter,
@@ -77,15 +91,29 @@ body {
 
     color: #ecfdf5;
 
-    min-height: 100vh;
+    padding-top:
+        max(
+            18px,
+            env(safe-area-inset-top)
+        );
 
-    padding:
-        max(18px, env(safe-area-inset-top))
-        max(16px, env(safe-area-inset-right))
-        max(22px, env(safe-area-inset-bottom))
-        max(16px, env(safe-area-inset-left));
+    padding-right:
+        max(
+            12px,
+            env(safe-area-inset-right)
+        );
 
-    overflow-x: hidden;
+    padding-bottom:
+        max(
+            22px,
+            env(safe-area-inset-bottom)
+        );
+
+    padding-left:
+        max(
+            12px,
+            env(safe-area-inset-left)
+        );
 
     background:
 
@@ -114,6 +142,15 @@ body {
             #071822 100%
         );
 
+    /*
+        IMPORTANT:
+        Do NOT use:
+            touch-action: manipulation;
+            overscroll-behavior: none;
+            preventDefault() on page touch events.
+
+        The browser/WebView should own vertical scrolling.
+    */
 }
 
 
@@ -141,7 +178,6 @@ body {
     height: 190px;
 
     top: 15%;
-
     left: -90px;
 
     background: #10b981;
@@ -156,7 +192,6 @@ body {
     height: 220px;
 
     right: -100px;
-
     bottom: 15%;
 
     background: #06b6d4;
@@ -173,10 +208,10 @@ body {
 .app {
 
     width: 100%;
-
     max-width: 620px;
 
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 
 }
 
@@ -191,7 +226,8 @@ body {
 
     text-align: center;
 
-    padding: 8px 0 20px;
+    padding:
+        8px 0 20px;
 
 }
 
@@ -201,12 +237,12 @@ body {
     width: 76px;
     height: 76px;
 
-    margin: 0 auto 14px;
+    margin:
+        0 auto 14px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     border-radius: 25px;
@@ -384,7 +420,6 @@ body {
 .language-btn {
 
     width: 100%;
-
     height: 53px;
 
     margin-bottom: 14px;
@@ -406,17 +441,17 @@ body {
         );
 
     font-size: 14px;
-
     font-weight: 750;
 
     box-shadow:
         inset 0 1px 0
         rgba(255,255,255,.05);
 
+    cursor: pointer;
+
     touch-action: manipulation;
 
 }
-
 
 .language-btn:active {
 
@@ -465,6 +500,10 @@ body {
 
     gap: 11px;
 
+    width: 100%;
+
+    min-width: 0;
+
 }
 
 
@@ -473,10 +512,11 @@ body {
     width: 39px;
     height: 39px;
 
+    min-width: 39px;
+
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     border-radius: 12px;
@@ -545,6 +585,8 @@ body {
 
     position: relative;
 
+    width: 100%;
+
 }
 
 
@@ -571,6 +613,7 @@ body {
 input[type="date"] {
 
     width: 100%;
+    min-width: 0;
 
     height: 56px;
 
@@ -631,6 +674,10 @@ input[type="date"]:focus {
 
     margin-bottom: 13px;
 
+    width: 100%;
+
+    min-width: 0;
+
 }
 
 
@@ -658,7 +705,6 @@ input[type="date"]:focus {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     border-radius: 9px;
@@ -684,6 +730,8 @@ input[type="date"]:focus {
     display: flex;
 
     gap: 7px;
+
+    min-width: 0;
 
 }
 
@@ -713,6 +761,8 @@ input[type="date"]:focus {
 
     font-weight: 750;
 
+    cursor: pointer;
+
     touch-action: manipulation;
 
 }
@@ -727,27 +777,27 @@ input[type="date"]:focus {
 
 /* =========================================================
    STAFF LIST
+   IMPORTANT:
+   NO INTERNAL SCROLLING.
+   THE WHOLE PAGE SCROLLS.
 ========================================================= */
 
 .staff-list {
+
     width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    /*
+        IMPORTANT:
+        Do NOT use max-height here.
+        Do NOT use overflow-y:auto here.
+    */
+
     overflow: visible;
+
     padding-right: 2px;
-}
-
-.staff-list::-webkit-scrollbar {
-
-    width: 4px;
-
-}
-
-
-.staff-list::-webkit-scrollbar-thumb {
-
-    background:
-        rgba(52,211,153,.24);
-
-    border-radius: 10px;
 
 }
 
@@ -765,6 +815,9 @@ input[type="date"]:focus {
     align-items: center;
 
     gap: 12px;
+
+    width: 100%;
+    min-width: 0;
 
     min-height: 61px;
 
@@ -790,7 +843,7 @@ input[type="date"]:focus {
         background .15s ease,
         box-shadow .15s ease;
 
-    touch-action: manipulation;
+    cursor: pointer;
 
 }
 
@@ -804,7 +857,6 @@ input[type="date"]:focus {
     left: 0;
 
     top: 0;
-
     bottom: 0;
 
     width: 3px;
@@ -842,6 +894,7 @@ input[type="date"]:focus {
 .staff-item.selected::before {
 
     background:
+
         linear-gradient(
             #34d399,
             #06b6d4
@@ -872,7 +925,6 @@ input[type="date"]:focus {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     border-radius: 13px;
@@ -898,8 +950,7 @@ input[type="date"]:focus {
 }
 
 
-.staff-item.selected
-.staff-avatar {
+.staff-item.selected .staff-avatar {
 
     color: white;
 
@@ -920,6 +971,10 @@ input[type="date"]:focus {
 
 }
 
+
+/* =========================================================
+   STAFF NAME
+========================================================= */
 
 .staff-name {
 
@@ -984,6 +1039,8 @@ input[type="date"]:focus {
         rgba(0,0,0,.17);
 
     position: relative;
+
+    cursor: pointer;
 
 }
 
@@ -1100,6 +1157,10 @@ input[type="date"]:focus {
 }
 
 
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
 .submit-btn {
 
     position: relative;
@@ -1140,6 +1201,8 @@ input[type="date"]:focus {
 
     letter-spacing: .3px;
 
+    cursor: pointer;
+
     touch-action: manipulation;
 
 }
@@ -1160,6 +1223,7 @@ input[type="date"]:focus {
     height: 100%;
 
     background:
+
         linear-gradient(
             90deg,
             transparent,
@@ -1268,8 +1332,7 @@ body[dir="rtl"] {
 }
 
 
-body[dir="rtl"]
-.date-symbol {
+body[dir="rtl"] .date-symbol {
 
     left: auto;
 
@@ -1278,8 +1341,7 @@ body[dir="rtl"]
 }
 
 
-body[dir="rtl"]
-input[type="date"] {
+body[dir="rtl"] input[type="date"] {
 
     padding-left: 15px;
 
@@ -1288,8 +1350,7 @@ input[type="date"] {
 }
 
 
-body[dir="rtl"]
-.staff-item::before {
+body[dir="rtl"] .staff-item::before {
 
     left: auto;
 
@@ -1298,8 +1359,7 @@ body[dir="rtl"]
 }
 
 
-body[dir="rtl"]
-.staff-list {
+body[dir="rtl"] .staff-list {
 
     padding-right: 0;
 
@@ -1331,6 +1391,80 @@ body[dir="rtl"]
 
 /* =========================================================
    MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding-left:
+            max(
+                10px,
+                env(safe-area-inset-left)
+            );
+
+        padding-right:
+            max(
+                10px,
+                env(safe-area-inset-right)
+            );
+
+    }
+
+    .app {
+
+        width: 100%;
+        max-width: 100%;
+
+    }
+
+    .section {
+
+        padding: 15px;
+
+    }
+
+    .header h1 {
+
+        font-size: 25px;
+
+    }
+
+    .logo {
+
+        width: 70px;
+        height: 70px;
+
+    }
+
+    .section-title-wrap {
+
+        min-width: 0;
+
+    }
+
+    .section-title,
+    .section-caption {
+
+        max-width: 100%;
+
+        overflow-wrap: anywhere;
+
+    }
+
+    .staff-list {
+
+        width: 100%;
+
+        overflow: visible;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
 ========================================================= */
 
 @media (max-width: 420px) {
@@ -1367,225 +1501,46 @@ body[dir="rtl"]
 
 
 /* =========================================================
-   NO ZOOM
-========================================================= */
-
-button,
-input,
-.staff-item {
-
-    touch-action: manipulation;
-
-}
-
-</style>
-
-
-
-<style>
-
-/* =========================================================
-   RESPONSIVE / FITTED LAYOUT ONLY
-   Keeps existing design unchanged
-   ========================================================= */
-
-/* Prevent horizontal overflow */
-html,
-body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-/* Make all elements calculate width correctly */
-* {
-    box-sizing: border-box;
-}
-
-
-/* =========================================================
-   MAIN CONTENT
-   ========================================================= */
-
-.container,
-.app,
-.main-container {
-    width: 100%;
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-/* =========================================================
-   IMAGES / MEDIA
-   ========================================================= */
-
-img,
-video,
-canvas {
-    max-width: 100%;
-    height: auto;
-}
-
-
-/* =========================================================
-   DATE BOX
-   ========================================================= */
-
-.date-box {
-    width: 100%;
-    max-width: 100%;
-}
-
-.date-box input[type="date"] {
-    width: 100%;
-    min-width: 0;
-}
-
-
-/* =========================================================
-   STAFF AREA
-   ========================================================= */
-
-.staff-list {
-    width: 100%;
-    max-width: 100%;
-
-    overflow-x: hidden;
-    overflow-y: auto;
-
-    -webkit-overflow-scrolling: touch;
-}
-
-
-/* =========================================================
-   STAFF ITEMS
-   ========================================================= */
-
-.staff-item {
-    width: 100%;
-    max-width: 100%;
-
-    min-width: 0;
-}
-
-.staff-name {
-    min-width: 0;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   STAFF TOOLS
-   ========================================================= */
-
-.staff-tools {
-    width: 100%;
-    max-width: 100%;
-
-    min-width: 0;
-}
-
-.tools {
-    min-width: 0;
-}
-
-.tool-btn {
-    max-width: 100%;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   SUBMIT
-   ========================================================= */
-
-.submit-btn {
-    width: 100%;
-    max-width: 100%;
-}
-
-
-/* =========================================================
-   SMALL PHONES
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    body {
-        width: 100%;
-        max-width: 100%;
-
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    .container,
-    .app,
-    .main-container {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .section-title-wrap {
-        width: 100%;
-        min-width: 0;
-    }
-
-    .section-title-wrap > div:last-child {
-        min-width: 0;
-    }
-
-    .section-title,
-    .section-caption {
-        max-width: 100%;
-        overflow-wrap: anywhere;
-    }
-
-    .date-box {
-        width: 100%;
-    }
-
-    .staff-tools {
-        width: 100%;
-    }
-
-    .staff-list {
-        width: 100%;
-        max-width: 100%;
-    }
-
-}
-
-
-/* =========================================================
    VERY SMALL PHONES
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 380px) {
 
     body {
-        padding-left: 10px;
-        padding-right: 10px;
+
+        padding-left:
+            max(
+                8px,
+                env(safe-area-inset-left)
+            );
+
+        padding-right:
+            max(
+                8px,
+                env(safe-area-inset-right)
+            );
+
     }
 
     .staff-tools {
+
         gap: 8px;
+
     }
 
     .tools {
+
         max-width: 100%;
+
     }
 
     .tool-btn {
+
         min-width: 0;
+
         padding-left: 9px;
         padding-right: 9px;
+
     }
 
 }
@@ -1593,20 +1548,23 @@ canvas {
 
 /* =========================================================
    TABLETS
-   ========================================================= */
+========================================================= */
 
 @media (min-width: 601px) and (max-width: 900px) {
 
     body {
+
         padding-left: 20px;
         padding-right: 20px;
+
     }
 
-    .container,
-    .app,
-    .main-container {
+    .app {
+
         width: 100%;
+
         max-width: 680px;
+
     }
 
 }
@@ -1614,102 +1572,101 @@ canvas {
 
 /* =========================================================
    DESKTOP
-   ========================================================= */
+========================================================= */
 
 @media (min-width: 901px) {
 
-    .container,
-    .app,
-    .main-container {
+    .app {
+
         width: 100%;
+
         max-width: 720px;
+
     }
 
 }
 
 
 /* =========================================================
-   MOBILE TOUCH
-   ========================================================= */
-
-button,
-input,
-select,
-textarea {
-    max-width: 100%;
-}
-
-button,
-input[type="checkbox"],
-input[type="date"] {
-    touch-action: manipulation;
-}
-
-
-/* =========================================================
-   PREVENT INPUT ZOOM ON MOBILE
-   ========================================================= */
+   INPUT SIZE
+   16px prevents iOS input zoom.
+========================================================= */
 
 input,
 select,
 textarea {
+
     font-size: 16px;
+
 }
 
 
 /* =========================================================
-   RTL RESPONSIVE SUPPORT
-   Does not change your existing visual design
-   ========================================================= */
+   RTL DOCUMENT
+========================================================= */
 
 html[dir="rtl"] {
+
     direction: rtl;
+
 }
 
 html[dir="rtl"] body {
+
     direction: rtl;
+
 }
 
 
 /* =========================================================
-   SAFE AREA FOR PWA PHONES
-   ========================================================= */
+   ACCESSIBILITY / FOCUS
+========================================================= */
 
-@supports (padding: env(safe-area-inset-left)) {
+button:focus-visible,
+input:focus-visible {
 
-    body {
-        padding-left:
-            max(
-                10px,
-                env(safe-area-inset-left)
-            );
+    outline:
+        2px solid
+        rgba(52,211,153,.75);
 
-        padding-right:
-            max(
-                10px,
-                env(safe-area-inset-right)
-            );
+    outline-offset: 2px;
 
-        padding-bottom:
-            max(
-                12px,
-                env(safe-area-inset-bottom)
-            );
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+
+        scroll-behavior: auto !important;
+
     }
 
 }
 
 </style>
 
-
-
 </head>
+
 
 <body>
 
 <div class="bg-orb orb-one"></div>
 
 <div class="bg-orb orb-two"></div>
+
 
 <div class="app">
 
@@ -1763,6 +1720,7 @@ html[dir="rtl"] body {
 <button
     class="language-btn"
     id="langButton"
+    type="button"
     onclick="toggleLang()">
 
     🌐 Arabic / English
@@ -1811,7 +1769,8 @@ html[dir="rtl"] body {
 
     <label
         class="date-label"
-        id="lblDate">
+        id="lblDate"
+        for="otdate">
 
         SELECT DATE
 
@@ -1896,6 +1855,7 @@ html[dir="rtl"] body {
             <button
                 class="tool-btn"
                 id="btnSelectAll"
+                type="button"
                 onclick="selectAll()">
 
                 ✓ Select All
@@ -1906,6 +1866,7 @@ html[dir="rtl"] body {
             <button
                 class="tool-btn"
                 id="btnClearAll"
+                type="button"
                 onclick="clearAll()">
 
                 Clear
@@ -1943,6 +1904,7 @@ html[dir="rtl"] body {
     <button
         class="submit-btn"
         id="btnSubmit"
+        type="button"
         onclick="saveOT()">
 
         <span id="submitText">
@@ -1969,8 +1931,8 @@ html[dir="rtl"] body {
 
 </div>
 
-<script>
 
+<script>
 
 /* =========================================================
    SUPABASE
@@ -2008,7 +1970,6 @@ async function loadStaff() {
             "staffdetails?isactive=eq.1&select=id,name",
 
             {
-
                 headers: {
 
                     "apikey": KEY,
@@ -2036,7 +1997,7 @@ async function loadStaff() {
             await res.json();
 
 
-        renderStaff();
+        await renderStaff();
 
     }
 
@@ -2152,6 +2113,30 @@ function getInitials(name) {
 
 
 /* =========================================================
+   ESCAPE HTML
+   Prevents staff names from injecting HTML.
+========================================================= */
+
+function escapeHtml(value) {
+
+    if (value === null || value === undefined) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
    RENDER STAFF
 ========================================================= */
 
@@ -2215,11 +2200,11 @@ async function renderStaff() {
 
                 <div class="staff-name">
 
-                    ${name}
+                    ${escapeHtml(name)}
 
                     <span class="staff-id">
 
-                        ID: ${s.id}
+                        ID: ${escapeHtml(s.id)}
 
                     </span>
 
@@ -2229,7 +2214,8 @@ async function renderStaff() {
                 <input
                     class="staff-checkbox"
                     type="checkbox"
-                    value="${s.id}"
+                    value="${escapeHtml(s.id)}"
+                    aria-label="${escapeHtml(s.name)}"
                     onclick="event.stopPropagation(); updateSelection()">
 
             </div>
@@ -2387,6 +2373,23 @@ function clearAll() {
 
 
     updateSelection();
+
+}
+
+
+/* =========================================================
+   FRIDAY VALIDATION
+========================================================= */
+
+function isFriday(dateString) {
+
+    const date =
+        new Date(
+            dateString + "T00:00:00"
+        );
+
+
+    return date.getDay() === 5;
 
 }
 
@@ -2562,6 +2565,25 @@ async function saveOT() {
     }
 
 
+    /*
+        Friday-only business rule.
+    */
+
+    if (!isFriday(date)) {
+
+        alert(
+
+            isArabic
+            ? "يرجى اختيار يوم الجمعة فقط"
+            : "Please select a Friday date"
+
+        );
+
+        return;
+
+    }
+
+
     const checked =
         document.querySelectorAll(
             ".staff-checkbox:checked"
@@ -2593,7 +2615,8 @@ async function saveOT() {
 
                 staffid:
                     parseInt(
-                        checkbox.value
+                        checkbox.value,
+                        10
                     ),
 
                 otdate:
@@ -2665,7 +2688,8 @@ async function saveOT() {
 
                     headers: {
 
-                        "apikey": KEY,
+                        "apikey":
+                            KEY,
 
                         "Authorization":
                             "Bearer " + KEY,
@@ -2693,6 +2717,7 @@ async function saveOT() {
             const err =
                 await res.text();
 
+
             throw new Error(err);
 
         }
@@ -2716,8 +2741,8 @@ async function saveOT() {
             "otdate"
         ).value = "";
 
-
     }
+
 
     catch (error) {
 
@@ -2760,69 +2785,6 @@ async function saveOT() {
 }
 
 
-
-
-
-/* =========================================================
-   PREVENT CTRL + WHEEL ZOOM
-========================================================= */
-
-document.addEventListener(
-
-    "wheel",
-
-    function(event) {
-
-        if (event.ctrlKey) {
-
-            event.preventDefault();
-
-        }
-
-    },
-
-    {
-        passive: false
-    }
-
-);
-
-
-/* =========================================================
-   PREVENT KEYBOARD ZOOM
-========================================================= */
-
-document.addEventListener(
-
-    "keydown",
-
-    function(event) {
-
-        if (
-
-            (event.ctrlKey ||
-             event.metaKey)
-
-            &&
-
-            (
-                event.key === "+" ||
-                event.key === "-" ||
-                event.key === "=" ||
-                event.key === "0"
-            )
-
-        ) {
-
-            event.preventDefault();
-
-        }
-
-    }
-
-);
-
-
 /* =========================================================
    START
 ========================================================= */
@@ -2830,6 +2792,7 @@ document.addEventListener(
 loadStaff();
 
 </script>
+
 
 </body>
 
